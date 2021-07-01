@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../stylesheets/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <a href="/">Car Seller</a>
+        <a href="/sell/0">Buy/Sell</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <form style="display: none;" id="imgfrm" action="/uploadimage" method="post" enctype="multipart/form-data">
+        <input id="frm"  type="file" name="image">
+    </form>
+
+    <div id="container">
+        <div id="dets">
+            <div id="image">
+                
+                <img src=<%= foundUser.profileImage %> alt="">
+            </div>
+            <div id="txt">
+                <h2>
+                    <%= foundUser.username %>
+                </h2>
+                <button id="btn">change image</button>
+            </div>
+        </div>
+        <div id="form">
+            <h2>Make new car selling listing.</h2>
+            <form action="/addcar" method="POST" enctype="multipart/form-data">
+                <input type="text" placeholder="car's price" name="carsprice">
+                <input type="text" placeholder="car's name" name="carsname">
+                <input type="text" placeholder="contact" name="contact">
+                <input type="file" name="carimg">
+                <input type="submit">
+            </form>
+        </div>
+        <div id="posts">
+            <h3>Your Previous Entries</h3>
+            <% if(foundUser.cars.length < 1) { %>
+                <h5>No car for sell</h5>
+            <% } else{ %>
+                <% foundUser.cars.forEach(function(car){ %>    
+                    <div class="post">        
+                        <img src="<%= car.carimg %>" alt="some image">
+                        <h3>Car name is : <%= car.carname %></h3>
+                        <h3>Car Price is : <%= car.carprice %></h3>
+                        <a href="tel:<%=car.contact%>">
+                            <i class="ri-phone-fill"></i>
+                            Call Seller 
+                        </a>
+                    </div>
+                <% }) %>
+            <% } %>
+            
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#frm').style.display = 'none';
+        var btn = document.querySelector('#btn');
+        btn.addEventListener('click', function(){
+            document.querySelector('#frm').click();
+        })
+        document.querySelector('#frm').addEventListener('change', function(){
+            document.querySelector('#imgfrm').submit();
+        })
+    </script>
+</body>
+
+</html>

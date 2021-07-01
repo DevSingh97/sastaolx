@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../stylesheets/sell.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav>
+        <a href="#">Car Seller</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <div id="container">
+        <h2>All Selling Cars</h2>
+        <div id="posts">
+            <% cars.forEach((car)=>{%>
+                <div class="post">
+                    <img src=<%=car.carimg%> alt="some image">
+                    <h3><%=car.carname%></h3>
+                    <h5>Rs. <%=car.carprice%> /-</h5>
+                    <a href="tel:<%=car.contact%>">
+                        <i class="ri-phone-fill"></i>
+                        Grab Deal
+                    </a>
+                </div>
+            <%})%>
+            <% for(var i = 0; i < pages; i++){%>
+                <a href=<%='/sell/'+i%> >
+                <%= i + 1 %>
+                </a>
+            <%}%>
+            
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+
+</html>
